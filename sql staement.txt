@@ -1,0 +1,89 @@
+create database internet;
+use internet;
+create table usermassege
+(
+	账号 	varchar(15)		not null primary key,
+    登录密码 	varchar(15) 	not null,
+    网名 	char(10),
+    地区 	varchar(10),
+    性别 	char(1),
+    头像 	varchar(100),
+    电话 	char(12)
+);
+create table massege
+(
+	发送人 	varchar(15),
+    接收人 	varchar(15),
+    内容 	tinytext,
+    消息类型 	int,
+    发送时间  datetime,
+    状态 	int,
+    primary key(发送人,接收人)
+);
+insert into usermassege values("10000","123456","沧浪之水","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into usermassege values("10001","123456","My","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into usermassege values("10002","123456","逗比","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into usermassege values("10003","123456","明朝散发","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into usermassege values("10004","123456","软件攻城狮","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into usermassege values("10005","123456","JAVA","海南省海口市","男","D:\JAVA头像\胖虎.jpg","13111907202");
+insert into massege values("10000","10001","今晚去哪吃饭？",1,"2019-5-10 19:09:38",1);
+insert into massege values("10001","10000","北门咋样？",1,"2019-5-10 19:10:28",1);
+insert into massege values("10000","10001","吃一手湘菜？可以啊兄Dei",1,"2019-5-10 19:12:08",1);
+insert into massege values("10001","10000","嗯嗯，湘菜可以",1,"2019-5-10 19:12:39",1);
+insert into massege values("10000","10001","OK，到时候北门见",1,"2019-5-10 19:15:38",1);
+insert into massege values("10000","10001","哈哈哈哈哈",1,"2019-5-10 19:15:49",1);
+drop table massege;
+create table massege
+(
+	发送人 	varchar(15),
+    接收人 	varchar(15),
+    内容 	tinytext,
+    消息类型 	int,
+    发送时间  datetime primary key,
+    状态 	int
+    
+);
+insert into massege values("10000","10001","今晚去哪吃饭？",1,"2019-5-10 19:09:38",1);
+insert into massege values("10001","10000","北门咋样？",1,"2019-5-10 19:10:28",1);
+insert into massege values("10000","10001","吃一手湘菜？可以啊兄Dei",1,"2019-5-10 19:12:08",1);
+insert into massege values("10001","10000","嗯嗯，湘菜可以",1,"2019-5-10 19:12:39",1);
+insert into massege values("10000","10001","OK，到时候北门见",1,"2019-5-10 19:15:38",1);
+insert into massege values("10000","10001","哈哈哈哈哈",1,"2019-5-10 19:15:49",1);
+select * from massege;
+select * from usermassege;
+
+create database u10000;
+use u10000;
+create table myfriend
+(
+	好友账号 	varchar(15)		primary key
+);
+insert into myfriend values("10001");
+insert into myfriend values("10002");
+insert into myfriend values("10003");
+insert into myfriend values("10004");
+insert into myfriend values("10005");
+
+create database u10001;
+use u10001;
+create table myfriend
+(
+	好友账号 	varchar(15)		primary key
+);
+insert into myfriend values("10000");
+insert into myfriend values("10002");
+insert into myfriend values("10003");
+insert into myfriend values("10004");
+insert into myfriend values("10005");
+
+use internet;
+select 网名 from usermassege
+where 账号 in (select * from u10000.myfriend);
+
+select 网名,发送时间,内容
+from  usermassege join massege on (发送人=账号)
+order by 发送时间 ;
+
+
+
+
